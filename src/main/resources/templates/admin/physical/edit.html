@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="Cherish">
+    <title>测试详情</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- page heading start-->
+    <div class="page-heading">
+        <h3>测试详情</h3>
+        <ul class="breadcrumb">
+            <li><a href="/physical">测试数据</a></li>
+            <li class="active"> 测试详情 </li>
+        </ul>
+    </div>
+    <!-- page heading end-->
+
+    <!--body wrapper start-->
+    <div class="wrapper">
+
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel">
+                    <div class="panel-body">
+                        <div class=" form">
+                            <form class="cmxform form-horizontal adminex-form" id="physicalForm"
+                                  method="post" th:action="@{/physical/update}">
+
+                                <input type="hidden" name="id" th:value="${physical} ? ${physical.id}"/>
+
+                                <div class="form-group">
+                                    <label for="username" class="control-label col-md-2 col-sm-2">账号:</label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input id="username" name="username" class="form-control"
+                                               placeholder="账号" minlength="1" maxlength="16" required
+                                               th:value="${physical} ? ${physical.username}" disabled/>
+                                        <p class="help-block">
+                                            <label class="error-label"
+                                                   th:text="${errorMap} ? ${errorMap['username']}"></label>
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nickname" class="control-label col-md-2 col-sm-2">呢称:</label>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="text" id="nickname" name="nickname" class="form-control"
+                                               placeholder="呢称" minlength="1" maxlength="16" required disabled
+                                               th:value="${physical} ? ${physical.nickname}" />
+                                        <p class="help-block">
+                                            <label class="error-label"
+                                                   th:text="${errorMap} ? ${errorMap['nickname']}"></label>
+                                        </p>
+                                    </div>
+
+                                    <label for="gender" class="control-label col-sm-2">性别:</label>
+                                    <div class="col-sm-2 col-sm-2">
+                                        <select name="gender" id="gender" class="form-control" disabled>
+                                            <option value="1">男</option>
+                                            <option value="0" th:attr="selected=(${physical.gender} ne 1)">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <!--
+                                    男生：身高、体重、肺活量、体前屈、立定跳远、50米跑、1000米跑、引体向上
+                                    女生：身高、体重、肺活量、体前屈、立定跳远、50米跑、800米跑、1分钟仰卧起坐
+                                    -->
+
+                                <div class="form-group">
+                                    <label for="height" class="control-label col-sm-2">身高(cm):</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" id="height" name="height" class="form-control" required
+                                               th:value="${physical?.height}"/>
+                                    </div>
+
+                                    <label for="weight" class="control-label col-sm-2">体重(kg):</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" id="weight" name="weight" class="form-control" required
+                                               th:value="${physical} ? ${physical.weight}"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vitalCapacity" class="control-label col-sm-2">肺活量(ml):</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" id="vitalCapacity" name="vitalCapacity" class="form-control" required
+                                               th:value="${physical} ? ${physical.vitalCapacity}"/>
+                                    </div>
+
+                                    <label for="goodMonring" class="control-label col-sm-2">体前屈(cm):</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" id="goodMonring" name="goodMonring" class="form-control" required
+                                               th:value="${physical} ? ${physical.goodMonring}"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="jump" class="control-label col-sm-2">立定跳远(cm):</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" id="jump" name="jump" class="form-control" required
+                                               th:value="${physical} ? ${physical.jump}"/>
+                                    </div>
+
+                                    <label for="meter50" class="control-label col-sm-2">50米耗时(s):</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" id="meter50" name="meter50" class="form-control" required
+                                               th:value="${physical} ? ${physical.meter50}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" th:if="${physical.gender} eq 1">
+                                    <label for="meter1000" class="control-label col-sm-2">1000米耗时(s):</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" id="meter1000" name="meter1000" class="form-control" required
+                                               th:value="${physical} ? ${physical.meter1000}"/>
+                                    </div>
+
+                                    <label for="pullUp" class="control-label col-sm-2">引体向上(个):</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" id="pullUp" name="pullUp" class="form-control" required
+                                               th:value="${physical} ? ${physical.pullUp}"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" th:if="${physical.gender} ne 1">
+                                    <label for="meter800" class="control-label col-sm-2">800米耗时(s):</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" id="meter800" name="meter800" class="form-control" required
+                                               th:value="${physical} ? ${physical.meter800}"/>
+                                    </div>
+
+                                    <label for="sitUp" class="control-label col-sm-2">仰卧起坐(个/1分钟):</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" id="sitUp" name="sitUp" class="form-control" required
+                                               th:value="${physical} ? ${physical.sitUp}"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="score" class="control-label col-sm-2">体能得分:</label>
+                                    <div class="col-sm-7">
+                                        <input type="number" id="score" name="score" class="form-control" required
+                                               th:value="${physical} ? ${physical.score}"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div layout:fragment="javascript">
+    <script type="text/javascript">
+        $(function () {
+            //菜单的active
+            $('.custom-nav .nav-active').removeClass('nav-active');
+            $('.custom-nav .active').removeClass('active');
+            $("#customerMenu").addClass("nav-active");
+            $("#physicalLi").addClass("active");
+        });
+    </script>
+    <p class="msg-block" th:if="${errorMap}">
+        <script th:if="${errorMap['msg']}" th:inline="javascript">
+            /*<![CDATA[*/
+            var msg = [[${errorMap['msg']}]] ;
+            $(function () {
+                myModalWarning(msg);
+            });
+            /*]]>*/
+        </script>
+    </p>
+</div>
+</body>
+</html>
