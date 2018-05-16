@@ -10,12 +10,12 @@
         <!-- hibernate 输出SQL -->
         <logger name="org.hibernate.SQL" level="DEBUG"/>
         <logger name="org.hibernate" level="INFO"/>
-        <logger name="cn.cherish.xjgl" level="DEBUG"/>
+        <logger name="cn.cherish" level="DEBUG"/>
 
         <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file>../logs/xjgl.log</file>
+            <file>../logs/tineng.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>../logs/xjgl.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <fileNamePattern>../logs/tineng.%d{yyyy-MM-dd}.log</fileNamePattern>
                 <maxHistory>30</maxHistory>
             </rollingPolicy>
             <encoder>
